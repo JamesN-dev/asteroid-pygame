@@ -1,0 +1,86 @@
+exclude = [
+  ".bzr",
+  ".direnv",
+  ".eggs",
+  ".git",
+  ".git-rewrite",
+  ".hg",
+  ".ipynb_checkpoints",
+  ".mypy_cache",
+  ".nox",
+  ".pants.d",
+  ".pyenv",
+  ".pytest_cache",
+  ".pytype",
+  ".ruff_cache",
+  ".svn",
+  ".tox",
+  ".venv",
+  ".vscode",
+  "__pypackages__",
+  "_build",
+  "build",
+  "dist",
+  "node_modules",
+  "site-packages",
+  "venv",
+  "data",
+  "docs",
+  "logs",
+  "migrations",
+  "frontend",
+]
+
+# ruff.toml
+
+# ... (exclude section remains the same) ...
+
+line-length = 88
+indent-width = 4
+target-version = "py312"
+show-fixes = true
+unsafe-fixes = true      # Keep if you trust the unsafe fixes
+
+[lint]
+# Added C4, SIM, T20, DJ - Remove any you don't want
+select = [
+  "E4",
+  "E7",
+  "E9",  # pycodestyle errors
+  "F",   # pyflakes
+  "W",   # pycodestyle warnings
+  "UP",  # pyupgrade
+  "B",   # flake8-bugbear
+  "I",   # isort
+  "TC",  # flake8-type-checking
+  "C4",  # flake8-comprehensions
+  "SIM", # flake8-simplify
+  "T20", # flake8-print
+  "DJ",  # flake8-django
+]
+ignore = [
+  "ISC001", # Implicit string concatenation
+  # Add other ignores as needed, e.g., T201 if print is okay sometimes
+]
+
+# Allow fix for all enabled rules (when `--fix`) is provided.
+fixable = ["ALL"]
+unfixable = []    # Specify rules never to fix if needed
+
+# Allow unused variables when underscore-prefixed.
+dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+
+[lint.pydocstyle]
+convention = "google"
+
+# Consider if you want to format code in docstrings
+[lint.isort]
+# Add any isort specific configs if needed
+
+[format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"
+docstring-code-format = false     # Set to true to format code in docstrings
+# docstring-code-line-length = "dynamic" # Default when docstring-code-format=true
