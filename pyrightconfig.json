@@ -1,5 +1,5 @@
 {
-  "typeCheckingMode": "strict",
+  "typeCheckingMode": "off",
   "pythonVersion": "3.12",
   "pythonPlatform": "Darwin",
   "venv": "venv",

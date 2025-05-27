@@ -1,26 +1,38 @@
 import pygame
 from pygame.locals import *
 from constants import *
+from player import Player
 
 
 def main():
+    x = SCREEN_WIDTH / 2
+    y = SCREEN_HEIGHT / 2
+    screen = pygame.display.set_mode([SCREEN_WIDTH, SCREEN_HEIGHT])
+    surface = pygame.Surface((SCREEN_WIDTH, SCREEN_HEIGHT), pygame.SRCALPHA)
     pygame.init()
     clock = pygame.time.Clock()
     dt = 0
-    screen = pygame.display.set_mode([SCREEN_WIDTH, SCREEN_HEIGHT])
-    surface = pygame.Surface((SCREEN_WIDTH, SCREEN_HEIGHT), pygame.SRCALPHA)
+
+    updatable = pygame.sprite.Group()
+    drawable = pygame.sprite.Group()
+    Player.containers = (updatable, drawable)
+
+    player = Player(x, y)
+
     print("Starting Asteroids!")
+
     # ruff: noqa
-    print(f"Screen width: {SCREEN_WIDTH}")
-    print(f"Screen height: {SCREEN_HEIGHT}")
     running = True
     while running:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
+        updatable.update(dt)
         screen.fill("black")
-        # pygame.Surface.fill(screen, (0, 0, 0), None, 0)
+        for thing in drawable:
+            thing.draw(screen)
         pygame.display.flip()
+
         dt = clock.tick(60) / 1000
 
 
